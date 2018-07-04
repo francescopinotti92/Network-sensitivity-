@@ -1,0 +1,1 @@
+DebtRank.ipynb is a Python 3 notebook with code for network generation, debtrank simulation and plotting of results
