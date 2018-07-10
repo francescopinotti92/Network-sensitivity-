@@ -3,11 +3,11 @@ load 'Bankscope_C72_rescaled'
 addpath('matrixSamplingCode')
 addpath('debtrank')
 z_space = logspace(-12, -2, 100);
-phi_space = 0.02:0.02:0.6; 
+phi_space = 0.6; 
 n_run = 10;
 max_iter = 10^5;
-[dr_heatmap, ~] = get_heatmap(1, BankscopeRescaled, z_space, phi_space, ...
-                               n_run, max_iter);
+[dr_heatmap, ~] = get_heatmap(3, BankscopeRescaled, z_space, phi_space, ...
+                               n_run, max_iter, 6:0.001:7);
 
 % z_space = logspace(-12, -2, 100);
 % phi_space = 0.4;
