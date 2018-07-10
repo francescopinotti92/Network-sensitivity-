@@ -1,6 +1,7 @@
 % input the BankscopeRescaled
 load 'Bankscope_C72_rescaled'
-
+addpath('matrixSamplingCode')
+addpath('debtrank')
 z_space = logspace(-12, -2, 100);
 phi_space = 0.02:0.02:0.6; 
 n_run = 10;
