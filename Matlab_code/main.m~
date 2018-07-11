@@ -3,8 +3,8 @@ load 'Bankscope_C72_rescaled'
 addpath('matrixSamplingCode')
 addpath('debtrank')
 z_space = logspace(-4, 0, 100);
-phi_space = 0.6; 
-alpha_space = linspace(2, 10, 100);
+phi_space = 0.4; 
+alpha_space = linspace(, 10, 100);
 n_run = 10;
 max_iter = 10^5;
 [dr_heatmap, ~] = get_heatmap(3, BankscopeRescaled, z_space, phi_space, ...
@@ -29,7 +29,7 @@ xticks(linspace(1, 100, 10))
 xticklabels(num2cell(logspace(-4,0,10)))
 colormap('cool');
 colorbar;
-caxis([0 (1-phi_space)])
+caxis([0 phi_space])
 ylabel('alpha');
 xlabel('density (%)');
 
