@@ -1,11 +1,20 @@
 function [debtrank_value, equityLoss, num_default, num_iter] ...
                         = debtrank(interbankLiabilitiesMatrix, ...
                                     equityBeforeShock, shock, max_iter)
-
+%
+%INPUT: 
+%       interbankLiabilitiesMatrix(i,j) = Face Value of the debit that
+%       bank i has with bank j (bank j lent to bank i) 
+%
+%                                
+% OUTPUT:
+%
 % debtrank_value(:,1) is the final value of debtrank (initial shock subtracted)
 % debtrank_value(:,2) is the final value of debtrank (initial shock kept)
 % debtrank_value(:,3) is the debtrank value of the first reverberation
 % debtrank_value(:,4) is the debtrank value of the second reverberation
+%
+%
 
 interbankAssetMatrix = interbankLiabilitiesMatrix';
 n_banks = size(interbankAssetMatrix,1);
