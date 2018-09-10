@@ -1,4 +1,4 @@
- function outArray = sample_Interpolation_Cimini_ER_Bin(sr,sc,z,theta,Nsample)
+ function [outArray, BinProbMat] = sample_Interpolation_Cimini_ER_Bin(sr,sc,z,theta,Nsample)
     prodMat = (sc*sr').^theta;
     if length(z(:))==1
         %if the z input is a number then treat it as a number

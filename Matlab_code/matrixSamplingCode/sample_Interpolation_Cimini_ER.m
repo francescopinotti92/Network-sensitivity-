@@ -12,10 +12,14 @@ function outArray = sample_Interpolation_Cimini_ER(sr,sc,z,theta,Nsample)
 
     prodMat = (sc*sr');
     gravMat = prodMat./(sum(sr));
-    tmp = sample_Interpolation_Cimini_ER_Bin(sr,sc,z,theta,Nsample);
+    [tmp, BinProbMat] = sample_Interpolation_Cimini_ER_Bin(sr,sc,z,theta,Nsample);
+    outArray = zeros(length(sr), length(sc), Nsample);
     % there is a much more efficient way to broadcast this multiplication
     % to the whole array, but I do not remember matlab syntax for it
     for n=1:Nsample
-        outArray(:,:,n) = tmp(:,:,n).*gravMat;
+        outArray(:,:,n) = tmp(:,:,n) .* gravMat ./ BinProbMat ; 
+        %%% previous codes %%%
+        %outArray(:,:,n) = tmp(:,:,n).*gravMat; 
+        %%%%%%%%%%%%%%%%%%%%%%
     end   
 end
