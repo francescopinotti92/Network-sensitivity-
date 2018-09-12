@@ -19,7 +19,7 @@ NbanksGroup1 = 50;
 %Maximum number of iterations
 max_iter = 10^5;
 %intensity of the shock
-phi=0.5;
+rho=0.1;
 
 sr =BankscopeRescaled.LoansandAdvancestoBanksmilUSD2013;
 sc =BankscopeRescaled.DepositsfromBanksmilUSD2013;
@@ -30,23 +30,24 @@ ShockedBanks = [ones(1, NbanksGroup1), zeros(1, num_bank- NbanksGroup1)];
 h=figure(1)
 hold on
 for lambda = 0.1:0.1:0.4
-    % Density
-    idx_rho = 0;
-    for rho = 0.1:0.05:1
-        idx_rho = idx_rho+1;
-        z11 = invertDensityAsFunctionOfZ_Bipar(sr,sc,lambda,rho);
-        z12 = z11/lambda;
-        z21=z12;
-        z22 = z11;
-        zMat = [z11*ones(NbanksGroup1)  z12*ones(NbanksGroup1,num_bank- NbanksGroup1) ;
-            z21*ones(num_bank- NbanksGroup1,NbanksGroup1)  z22*ones(num_bank-NbanksGroup1) ];
-        
-        StackedMatrix = sampleCimini(sr,sc,zMat,n_run);
+    % Density        
+    z11 = invertDensityAsFunctionOfZ_Bipar(sr,sc,lambda,rho);
+    z12 = z11/lambda;
+    z21=z12;
+    z22 = z11;
+    zMat = [z11*ones(NbanksGroup1)  z12*ones(NbanksGroup1,num_bank- NbanksGroup1) ;
+    z21*ones(num_bank- NbanksGroup1,NbanksGroup1)  z22*ones(num_bank-NbanksGroup1) ];
+    
+    StackedMatrix = sampleCimini(sr,sc,zMat,n_run);
+    idx_phi = 0;
+    for phi = 0.1:0.05:1
+        idx_phi = idx_phi+1;
+
         for i = 1:n_run
             interbankLiabilitiesMatrix = StackedMatrix(:,:,i);
             shock = ShockedBanks*phi;
             [~, h_t, ~] = debtrank(interbankLiabilitiesMatrix, equityBeforeShock, shock, max_iter);
-            dR_vec(i, idx_rho) = sum((h_t(~ShockedBanks)-shock(~ShockedBanks)) .* equityBeforeShock(~ShockedBanks)' ./ sum(equityBeforeShock(~ShockedBanks)));
+            dR_vec(i, idx_phi) = sum((h_t(~ShockedBanks)-shock(~ShockedBanks)) .* equityBeforeShock(~ShockedBanks)' ./ sum(equityBeforeShock(~ShockedBanks)));
         end
     end
     plot(0.1:0.05:1, mean(dR_vec), 'DisplayName', ['\beta = ', num2str(lambda)])
