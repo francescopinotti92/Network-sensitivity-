@@ -44,7 +44,7 @@ dr = sum((h_t-h_1) .* equityBeforeShock' ./ sum(equityBeforeShock));
 
 debtrank_value = [dr dr_final dr_first dr_second];
 
-equityLoss = h_t;
+equityLoss = sum(h_t);
 num_iter = iter - 1;
 num_default = sum(h_t == 1);
 

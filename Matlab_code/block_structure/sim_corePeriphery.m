@@ -6,13 +6,13 @@ sc = BankscopeRescaled.DepositsfromBanksmilUSD2008; % liabilities
 equityBeforeShock = BankscopeRescaled.EquitymilUSD2008;
 [sr, sc, equityBeforeShock]  = shuffleStrenghtSequence(sr, sc, equityBeforeShock);
 
-thetaVec = 0:0.005:1;
-densitiesVec = 0.1:0.1:1;
+thetaVec = 0:0.01:1;
+densitiesVec = 0.06;
 % the entity of the shock
-shocksAmountsVec = 0:0.02:0.6;
+shocksAmountsVec = [0.02 0.32 0.52];
 
 % the size of each dimension
-Nsample = 10 ;
+Nsample = 15 ;
 Ntheta = length(thetaVec);
 Ndens = length(densitiesVec);
 NshocksAmounts = length(shocksAmountsVec);
@@ -20,13 +20,13 @@ NshocksInds = length(shocksAmountsVec);
 
 %debtrank_value, equityLoss, num_default, num_iter
 
-storeDebtRankVals_final = zeros(Nlambda,Ndens,NshocksAmounts);
-storeDebtRankVals_finalWithShock = zeros(Nlambda,Ndens,NshocksAmounts);
-storeDebtRankVals_first = zeros(Nlambda,Ndens,NshocksAmounts);
-storeDebtRankVals_second = zeros(Nlambda,Ndens,NshocksAmounts);
-storeDebtRankVals_eqLoss = zeros(Nlambda,Ndens,NshocksAmounts);
-storeDebtRankVals_numDefault = zeros(Nlambda,Ndens,NshocksAmounts);
-storeDebtRankVals_iter = zeros(Nlambda,Ndens,NshocksAmounts);
+storeDebtRankVals_final = zeros(Ntheta,Ndens,NshocksAmounts);
+storeDebtRankVals_finalWithShock = zeros(Ntheta,Ndens,NshocksAmounts);
+storeDebtRankVals_first = zeros(Ntheta,Ndens,NshocksAmounts);
+storeDebtRankVals_second = zeros(Ntheta,Ndens,NshocksAmounts);
+storeDebtRankVals_eqLoss = zeros(Ntheta,Ndens,NshocksAmounts);
+storeDebtRankVals_numDefault = zeros(Ntheta,Ndens,NshocksAmounts);
+storeDebtRankVals_iter = zeros(Ntheta,Ndens,NshocksAmounts);
 
 dr_value = zeros(Nsample, 4);
 finalWithShock = zeros(Nsample, 1);
@@ -34,10 +34,11 @@ eqLoss = zeros(Nsample, 1);
 numDefault = zeros(Nsample, 1);
 iter = zeros(Nsample, 1);
 
-ShockedBanks = [ones(1,50), zeros(1,50)];
+%ShockedBanks = [ones(1,50), zeros(1,50)];
+ShockedBanks = [ones(1,100)];
 
 for indTheta=1:Ntheta
-    theta = thetaVec(indLambda);
+    theta = thetaVec(indTheta);
     zVals = invertDensityAsFunctionOfZ_InterpolationCiminiER(sr,sc,theta,densitiesVec)';
     
     for indDens = 1:Ndens      
@@ -50,21 +51,21 @@ for indTheta=1:Ntheta
                 [dr_value(i,:), eqLoss(i), numDefault(i), iter(i)] = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
             end
                 
-            storeDebtRankVals_final(indLambda,indDens, indShocksAmounts) = mean(dr_value(:,1));
-            storeDebtRankVals_finalWithShock(indLambda,indDens,indShocksAmounts) = mean(dr_value(:,2));
-            storeDebtRankVals_first(indLambda,indDens,indShocksAmounts) = mean(dr_value(:,3));
-            storeDebtRankVals_second(indLambda,indDens,indShocksAmounts) = mean(dr_value(:,4));
-            storeDebtRankVals_eqLoss(indLambda,indDens,indShocksAmounts) = mean(eqLoss);
-            storeDebtRankVals_numDefault(indLambda,indDens,indShocksAmounts) = mean(numDefault);
-            storeDebtRankVals_iter(indLambda,indDens,indShocksAmounts) = mean(iter);
+            storeDebtRankVals_final(indTheta,indDens, indShocksAmounts) = mean(dr_value(:,1));
+            storeDebtRankVals_finalWithShock(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,2));
+            storeDebtRankVals_first(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,3));
+            storeDebtRankVals_second(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,4));
+            storeDebtRankVals_eqLoss(indTheta,indDens,indShocksAmounts) = mean(eqLoss);
+            storeDebtRankVals_numDefault(indTheta,indDens,indShocksAmounts) = mean(numDefault);
+            storeDebtRankVals_iter(indTheta,indDens,indShocksAmounts) = mean(iter);
         end
     end
  end
  
-fileName = 'DebtRankInterpolationCiminiER_UnifShock2008.mat';
+fileName = 'res.mat';
  
-save(filePathAndName,'storeDebtRankVals_final','storeDebtRankVals_finalMinusShock','storeDebtRankVals_first',....
-        'storeDebtRankVals_iter','storeDebtRankVals_second','densitiesVec','lambdaVec','shocksAmountsVec')
+save(fileName,'storeDebtRankVals_final','storeDebtRankVals_finalWithShock','storeDebtRankVals_first',....
+        'storeDebtRankVals_second','storeDebtRankVals_eqLoss','thetaVec','densitiesVec','shocksAmountsVec')
 
 
 
