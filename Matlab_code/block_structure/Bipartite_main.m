@@ -11,8 +11,8 @@ n_run = 1000;
 
 
 %transition parameter
-%lambdavec = 0.1:0.1:1;
-
+lambdavec = 0.1:0.1:0.4;
+phivec = 0.1:0.05:1;
 
 %Number of banks in the shocked goup
 NbanksGroup1 = 50;
@@ -33,10 +33,13 @@ Allbanks = 1:100;
 Group2 = Allbanks(~ismember(Allbanks, Group1));
 ShockedBanks(Group1) = 1;
 
-h=figure(1)
+plotData = zeros(numel(lambdavec), numel(phivec) );
+idx_lambda = 0;
+h=figure(1);
 hold on
-for lambda = 0.1:0.1:0.4
-    % Density        
+for lambda = lambdavec
+    % Density     
+    idx_lambda = idx_lambda+1;
     z11 = invertDensityAsFunctionOfZ_Bipar(sr,sc,lambda,rho);
     z12 = z11/lambda;
     z21=z12;
@@ -52,7 +55,8 @@ for lambda = 0.1:0.1:0.4
     StackedMatrix = sampleCimini(sr,sc,zMat,n_run);
     idx_phi = 0;
     %intensity of the shock
-    for phi = 0.1:0.05:1
+    
+    for phi = phivec
         idx_phi = idx_phi+1;
 
         for i = 1:n_run
@@ -65,8 +69,10 @@ for lambda = 0.1:0.1:0.4
             dR_vec(i, idx_phi) = sum((h_t(~ShockedBanks)-shock(~ShockedBanks)) .* equityBeforeShock(~ShockedBanks)' ./ sum(equityBeforeShock(~ShockedBanks)));
         end
     end
-    plot(0.1:0.05:1, mean(dR_vec), 'DisplayName', ['\beta = ', num2str(lambda)])
+    plotData(idx_lambda, :) = mean(dR_vec);
+    plot(phivec, plotData(idx_lambda, :), 'DisplayName', ['\beta = ', num2str(lambda)])
     legend()
     xlabel('\Theta')
     ylabel('average equity loss Second Layer')
 end
+save('Bipartite_fig4.mat', 'plotData', 'lambdavec', 'phivec');
