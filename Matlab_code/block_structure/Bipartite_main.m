@@ -19,7 +19,7 @@ NbanksGroup1 = 50;
 %Maximum number of iterations
 max_iter = 10^5;
 %Density of the network
-rho=0.1;
+rho=0.01;
 
 sr =BankscopeRescaled.LoansandAdvancestoBanksmilUSD2013;
 sc =BankscopeRescaled.DepositsfromBanksmilUSD2013;
