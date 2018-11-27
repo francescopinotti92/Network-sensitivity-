@@ -31,8 +31,8 @@ switch choice
                 idx_phi = 0;
                 for phi = phi_space
                     idx_phi = idx_phi + 1;
-                    shock = ones(1, num_bank) * phi; % uniform shock
-                    %shock = zeros(1, num_bank); shock(6) = phi; %point wise
+                    %shock = ones(1, num_bank) * phi; % uniform shock
+                    shock = zeros(1, num_bank); shock(randi(num_bank)) = phi; %point wise
                     [debtrank_value, ~, num_default] = debtrank(interbankLiabilitiesMatrix, equityBeforeShock, shock, max_iter);
                     
                     debtrank_mat(idx_z, idx_phi, idx_N) = debtrank_value(:,1);
@@ -69,7 +69,11 @@ switch choice
         ndefault_heatmap = mean(ndefault_mat, 3);
         
     case 3 %debtrank as the function of alpha and z
+<<<<<<< HEAD
        phi = phi_space(1);
+=======
+       phi = 1;
+>>>>>>> 017ecbd5dddbc96ae4ac9430fe4bef9b0a045ef9
        idx_z = 0;
         for z = z_space
              idx_z = idx_z + 1
@@ -81,8 +85,13 @@ switch choice
                 idx_alpha = 0;
                 for alpha = alpha_space
                     idx_alpha = idx_alpha + 1;
+<<<<<<< HEAD
                     shock = ones(1, num_bank) * phi; % uniform shock
                     %shock = zeros(1, num_bank); shock(6) = phi; %point wise
+=======
+                    %shock = ones(1, num_bank) * phi_space; % uniform shock
+                    shock = zeros(1, num_bank); shock(randi(num_bank)) = phi; %point wise
+>>>>>>> 017ecbd5dddbc96ae4ac9430fe4bef9b0a045ef9
                     [debtrank_value, ~, num_default] = nonlinear_debtrank(interbankLiabilitiesMatrix, ...
                                     equityBeforeShock, shock, max_iter, alpha);
                     
