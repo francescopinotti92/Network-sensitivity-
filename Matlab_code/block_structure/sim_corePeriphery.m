@@ -86,81 +86,81 @@ iter = zeros(Nsample, 1);
 % iter_M              = zeros(Nsample, 1);
 % 
 ShockedBanks = [ones(1,100)];
-% 
-% for indTheta=1:Ntheta
-%     indTheta
-%     theta = thetaVec(indTheta);
-%     zVals = invertDensityAsFunctionOfZ_InterpolationCiminiER(sr,sc,theta,densitiesVec)';
-%     
-%     for indDens = 1:Ndens      
-%         z = zVals(indDens);
-%         sampledMatrices = sample_Interpolation_Cimini_ER(sr,sc,z,theta,Nsample);
-%         
-%         for i = 1:Nsample
-%             %check which banks are core (periphery)
-%             [coreBanks, periBanks, midBanks] = getBanksCP(sampledMatrices(:,:,i), NCore);
+
+for indTheta=1:Ntheta
+    indTheta
+    theta = thetaVec(indTheta);
+    zVals = invertDensityAsFunctionOfZ_InterpolationCiminiER(sr,sc,theta,densitiesVec)';
+    
+    for indDens = 1:Ndens      
+        z = zVals(indDens);
+        sampledMatrices = sample_Interpolation_Cimini_ER(sr,sc,z,theta,Nsample);
+        
+        for i = 1:Nsample
+            %check which banks are core (periphery)
+            [coreBanks, periBanks, midBanks] = getBanksCP(sampledMatrices(:,:,i), NCore);
+            
+%             tmp1       = zeros(NCore,4);
+%             tmp2       = zeros(NCore,1);
+%             tmp3       = zeros(NCore,1);
+%             tmp4       = zeros(NCore,1);
 %             
-% %             tmp1       = zeros(NCore,4);
-% %             tmp2       = zeros(NCore,1);
-% %             tmp3       = zeros(NCore,1);
-% %             tmp4       = zeros(NCore,1);
-% %             
-% %             for j = 1:NCore %the number of banks in core
-% %                 shock = zeros(1,100); shock(coreBanks(j)) = 1;
-% %                 [tmp1(j,:), tmp2(j), tmp3(j), tmp4(j)] ...
-% %                     = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
-% %             end
-% % 
-% %             dr_value_C(i,1)     = mean(tmp1(:,1));    
-% %             dr_value_C(i,2)     = mean(tmp1(:,2));
-% %             dr_value_C(i,3)     = mean(tmp1(:,3));    
-% %             dr_value_C(i,4)     = mean(tmp1(:,4));
-% %             eqLoss_C(i)         = mean(tmp2);
-% %             numDefault_C(i)     = mean(tmp3);
-% %             iter_C(i)           = mean(tmp4);
-% %             
-% %             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %             
-% %             tmp1       = zeros(NCore,4);
-% %             tmp2       = zeros(NCore,1);
-% %             tmp3       = zeros(NCore,1);
-% %             tmp4       = zeros(NCore,1);
-% %             
-% %             for j = 1:NPeriphery %the number of banks in periphery
-% %                 shock = zeros(1,100); shock(periBanks(j)) = 1;
-% %                 [tmp1(j,:), tmp2(j), tmp3(j), tmp4(j)] ...
-% %                     = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
-% %             end
-% %             
-% %             dr_value_P(i,1)     = mean(tmp1(:,1));    
-% %             dr_value_P(i,2)     = mean(tmp1(:,2));
-% %             dr_value_P(i,3)     = mean(tmp1(:,3));    
-% %             dr_value_P(i,4)     = mean(tmp1(:,4));
-% %             eqLoss_P(i)         = mean(tmp2);
-% %             numDefault_P(i)     = mean(tmp3);
-% %             iter_P(i)           = mean(tmp4);
-% %                         
-% %             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %             
-% %             tmp1       = zeros(NCore,4);
-% %             tmp2       = zeros(NCore,1);
-% %             tmp3       = zeros(NCore,1);
-% %             tmp4       = zeros(NCore,1);
-% %             
-% %             for j = 1:NMiddle %the number of banks in periphery
-% %                 shock = zeros(1,100); shock(midBanks(j)) = 1;
-% %                 [tmp1(j,:), tmp2(j), tmp3(j), tmp4(j)] ...
-% %                     = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
-% %             end
-% %             
-% %             dr_value_M(i,1)     = mean(tmp1(:,1));    
-% %             dr_value_M(i,2)     = mean(tmp1(:,2));
-% %             dr_value_M(i,3)     = mean(tmp1(:,3));    
-% %             dr_value_M(i,4)     = mean(tmp1(:,4));
-% %             eqLoss_M(i)         = mean(tmp2);
-% %             numDefault_M(i)     = mean(tmp3);
-% %             iter_M(i)           = mean(tmp4);
+%             for j = 1:NCore %the number of banks in core
+%                 shock = zeros(1,100); shock(coreBanks(j)) = 1;
+%                 [tmp1(j,:), tmp2(j), tmp3(j), tmp4(j)] ...
+%                     = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
+%             end
 % 
+%             dr_value_C(i,1)     = mean(tmp1(:,1));    
+%             dr_value_C(i,2)     = mean(tmp1(:,2));
+%             dr_value_C(i,3)     = mean(tmp1(:,3));    
+%             dr_value_C(i,4)     = mean(tmp1(:,4));
+%             eqLoss_C(i)         = mean(tmp2);
+%             numDefault_C(i)     = mean(tmp3);
+%             iter_C(i)           = mean(tmp4);
+%             
+%             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%             
+%             tmp1       = zeros(NCore,4);
+%             tmp2       = zeros(NCore,1);
+%             tmp3       = zeros(NCore,1);
+%             tmp4       = zeros(NCore,1);
+%             
+%             for j = 1:NPeriphery %the number of banks in periphery
+%                 shock = zeros(1,100); shock(periBanks(j)) = 1;
+%                 [tmp1(j,:), tmp2(j), tmp3(j), tmp4(j)] ...
+%                     = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
+%             end
+%             
+%             dr_value_P(i,1)     = mean(tmp1(:,1));    
+%             dr_value_P(i,2)     = mean(tmp1(:,2));
+%             dr_value_P(i,3)     = mean(tmp1(:,3));    
+%             dr_value_P(i,4)     = mean(tmp1(:,4));
+%             eqLoss_P(i)         = mean(tmp2);
+%             numDefault_P(i)     = mean(tmp3);
+%             iter_P(i)           = mean(tmp4);
+%                         
+%             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%             
+%             tmp1       = zeros(NCore,4);
+%             tmp2       = zeros(NCore,1);
+%             tmp3       = zeros(NCore,1);
+%             tmp4       = zeros(NCore,1);
+%             
+%             for j = 1:NMiddle %the number of banks in periphery
+%                 shock = zeros(1,100); shock(midBanks(j)) = 1;
+%                 [tmp1(j,:), tmp2(j), tmp3(j), tmp4(j)] ...
+%                     = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
+%             end
+%             
+%             dr_value_M(i,1)     = mean(tmp1(:,1));    
+%             dr_value_M(i,2)     = mean(tmp1(:,2));
+%             dr_value_M(i,3)     = mean(tmp1(:,3));    
+%             dr_value_M(i,4)     = mean(tmp1(:,4));
+%             eqLoss_M(i)         = mean(tmp2);
+%             numDefault_M(i)     = mean(tmp3);
+%             iter_M(i)           = mean(tmp4);
+
 %             shock = zeros(1,100); shock(coreBanks) = 1;
 %             [dr_value_C(i,:), eqLoss_C(i), numDefault_C(i), iter_C(i)] ...
 %                 = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
@@ -173,7 +173,7 @@ ShockedBanks = [ones(1,100)];
 %             [dr_value_M(i,:), eqLoss_M(i), numDefault_M(i), iter_M(i)] ...
 %                 = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
 %             
-%         end
+         end
 %         
 %         CoreDebtRankVals_final(indTheta,indDens) = mean(dr_value_C(:,1));
 %         CoreDebtRankVals_finalWithShock(indTheta,indDens) = mean(dr_value_C(:,2));
@@ -198,9 +198,9 @@ ShockedBanks = [ones(1,100)];
 %         MiddleDebtRankVals_eqLoss(indTheta,indDens) = mean(eqLoss_M);
 %         MiddleDebtRankVals_numDefault(indTheta,indDens) = mean(numDefault_M);
 %         MiddleDebtRankVals_iter(indTheta,indDens) = mean(iter_M);
-%     end
-%  end
-%  
+    end
+ end
+ 
 % fileName = 'res.mat';
 %  
 % save(fileName, ...
@@ -246,37 +246,37 @@ ShockedBanks = [ones(1,100)];
 % %ShockedBanks = [ones(1,50), zeros(1,50)];
 % ShockedBanks = [ones(1,100)];
 % 
-for indTheta=1:Ntheta
-    indTheta
-    theta = thetaVec(indTheta);
-    zVals = invertDensityAsFunctionOfZ_InterpolationCiminiER(sr,sc,theta,densitiesVec)';
-    
-    for indDens = 1:Ndens      
-        z = zVals(indDens);
-        sampledMatrices = sample_Interpolation_Cimini_ER(sr,sc,z,theta,Nsample);
-    
-        for indShocksAmounts = 1:NshocksAmounts
-            shock = shocksAmountsVec(indShocksAmounts)*ShockedBanks;
-            for i = 1:Nsample
-                [dr_value(i,:), eqLoss(i), numDefault(i), iter(i)] = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
-            end
-                
-            storeDebtRankVals_final(indTheta,indDens, indShocksAmounts) = mean(dr_value(:,1));
-            storeDebtRankVals_finalWithShock(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,2));
-            storeDebtRankVals_first(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,3));
-            storeDebtRankVals_second(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,4));
-            storeDebtRankVals_eqLoss(indTheta,indDens,indShocksAmounts) = mean(eqLoss);
-            storeDebtRankVals_numDefault(indTheta,indDens,indShocksAmounts) = mean(numDefault);
-            storeDebtRankVals_iter(indTheta,indDens,indShocksAmounts) = mean(iter);
-        end
-    end
- end
- 
-fileName = 'res.mat';
- 
-save(fileName,'storeDebtRankVals_final','storeDebtRankVals_finalWithShock','storeDebtRankVals_first',....
-        'storeDebtRankVals_second','storeDebtRankVals_eqLoss','storeDebtRankVals_numDefault', ...
-        'storeDebtRankVals_iter','thetaVec','densitiesVec','shocksAmountsVec', 'Nsample')
+% for indTheta=1:Ntheta
+%     indTheta
+%     theta = thetaVec(indTheta);
+%     zVals = invertDensityAsFunctionOfZ_InterpolationCiminiER(sr,sc,theta,densitiesVec)';
+%     
+%     for indDens = 1:Ndens      
+%         z = zVals(indDens);
+%         sampledMatrices = sample_Interpolation_Cimini_ER(sr,sc,z,theta,Nsample);
+%     
+%         for indShocksAmounts = 1:NshocksAmounts
+%             shock = shocksAmountsVec(indShocksAmounts)*ShockedBanks;
+%             for i = 1:Nsample
+%                 [dr_value(i,:), eqLoss(i), numDefault(i), iter(i)] = debtrank(sampledMatrices(:,:,i), equityBeforeShock, shock, 10^5 );
+%             end
+%                 
+%             storeDebtRankVals_final(indTheta,indDens, indShocksAmounts) = mean(dr_value(:,1));
+%             storeDebtRankVals_finalWithShock(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,2));
+%             storeDebtRankVals_first(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,3));
+%             storeDebtRankVals_second(indTheta,indDens,indShocksAmounts) = mean(dr_value(:,4));
+%             storeDebtRankVals_eqLoss(indTheta,indDens,indShocksAmounts) = mean(eqLoss);
+%             storeDebtRankVals_numDefault(indTheta,indDens,indShocksAmounts) = mean(numDefault);
+%             storeDebtRankVals_iter(indTheta,indDens,indShocksAmounts) = mean(iter);
+%         end
+%     end
+%  end
+%  
+% fileName = 'res.mat';
+%  
+% save(fileName,'storeDebtRankVals_final','storeDebtRankVals_finalWithShock','storeDebtRankVals_first',....
+%         'storeDebtRankVals_second','storeDebtRankVals_eqLoss','storeDebtRankVals_numDefault', ...
+%         'storeDebtRankVals_iter','thetaVec','densitiesVec','shocksAmountsVec', 'Nsample')
 
 
 
