@@ -1,4 +1,4 @@
-single_bank_flag = true;
+single_bank_flag = false;
 set(0, 'DefaultAxesFontSize',20, 'DefaultAxesLineWidth', 2.0);
 set(0, 'DefaultTextFontSize',20, 'DefaultTextLineWidth',1.5);
 set(0, 'DefaultLineLineWidth',1.5);
@@ -12,7 +12,7 @@ n_run = 1000;
 
 
 %transition parameter
-lambdavec = 0.1:0.1:0.4;
+lambdavec = 0.02:0.02:0.4;
 phivec = 0.1:0.05:1;
 
 %Number of banks in the shocked goup
@@ -107,7 +107,7 @@ else
                 dR_vec(i, j) = sum((h_t(~ShockedBanks)-shock(~ShockedBanks)) .* equityBeforeShock(~ShockedBanks)' ./ sum(equityBeforeShock(~ShockedBanks)));
             end
         end
-        plot_data(idx_lambda, :) = mean(dR_vec, 1);
+        plot_data(idx_lambda, :) = mean(dR_vec,1);
     end
     p = boxplot(plot_data');
     xlabel('\beta')
