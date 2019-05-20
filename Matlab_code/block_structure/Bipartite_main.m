@@ -12,7 +12,7 @@ n_run = 1000;
 
 
 %transition parameter
-lambdavec = 0.02:0.02:0.4;
+lambdavec = [0.001, 0.002, 0.005];
 phivec = 0.1:0.05:1;
 
 %Number of banks in the shocked goup
