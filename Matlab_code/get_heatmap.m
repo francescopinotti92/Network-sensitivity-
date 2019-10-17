@@ -9,9 +9,9 @@ function [dr_heatmap, ndefault_heatmap] ...
 % dr_heatmap is the heatmap of debtrank results
 % ndefault_heatmap is the heatmap of number of defaulted banks
 
-sr =BankscopeRescaled.LoansandAdvancestoBanksmilUSD2013;
-sc =BankscopeRescaled.DepositsfromBanksmilUSD2013;
-equityBeforeShock = BankscopeRescaled.EquitymilUSD2013;
+sr =BankscopeRescaled.LoansandAdvancestoBanksmilUSD2008;
+sc =BankscopeRescaled.DepositsfromBanksmilUSD2008;
+equityBeforeShock = BankscopeRescaled.EquitymilUSD2008;
 
 num_bank = size(equityBeforeShock,1);
 

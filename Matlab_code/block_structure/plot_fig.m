@@ -28,59 +28,68 @@ axis_theta = [0:0.01:1];
 % 'Uniform \theta = 0.2' , ...
 % 'Uniform \theta = 0.3', ...
 % 'Single bank - Middle', ...
-    
-% storeDr = squeeze(storeDebtRankVals_final(:,3,[1 3]));
-% coreDr  = CoreDebtRankVals_final(:,3);
-% midDr   = MiddleDebtRankVals_final(:,3);
-% periDr  = PeripheryDebtRankVals_final(:,3);
-% 
-% figure
-% plot(axis_theta, [storeDr coreDr periDr]);
-% set(gca,'FontSize',20)
-% ylim([0 1])
-% ylabel('DebtRank')
-% xlabel('\phi')
-% legend({'Uniform \theta = 0.01', ...
-%         'Uniform \theta = 0.1' , ...
-%         'Single bank - Core', ...
-%         'Single bank - Periphery'}, ...
-%         'Location','southeast')
-% title('2008, \rho = 0.15')
-% 
-% storeDr = squeeze(storeDebtRankVals_final(:,idx_density,[1 3]));
-% coreDr  = CoreDebtRankVals_final(:,idx_density);
-% midDr   = MiddleDebtRankVals_final(:,idx_density);
-% periDr  = PeripheryDebtRankVals_final(:,idx_density);
-% 
-% figure
-% plot(axis_theta, [storeDr coreDr midDr periDr]);
-% set(gca,'FontSize',20)
-% ylim([0 1])
-% ylabel('DebtRank')
-% xlabel('\phi')
-% legend({'Uniform \theta = 0.01', ...
-%         'Uniform \theta = 0.1' , ...
-%         'Single bank - Core', ...
-%         'Single bank - Middle', ...
-%         'Single bank - Periphery'}, ...
-%         'Location','southeast')
-% title('2008, \rho = 0.05')
 
-midDr  = PeripheryDebtRankVals_final(:,:);
+idx_density = 1;
+%storeDr = squeeze(storeDebtRankVals_final(:,idx_density,[1 3]));
+storeDr = squeeze(storeDebtRankVals_final(:,idx_density,[1 3 5]));
+coreDr  = CoreDebtRankVals_final(:,idx_density);
+%midDr   = MiddleDebtRankVals_final(:,idx_density);
+periDr  = PeripheryDebtRankVals_final(:,idx_density);
 
 figure
-plot(axis_theta, midDr);
+%plot(axis_theta, [storeDr coreDr midDr periDr]);
+plot(axis_theta, [storeDr coreDr periDr]);
 set(gca,'FontSize',20)
 ylim([0 1])
 ylabel('DebtRank')
 xlabel('\phi')
-legend({'\rho = 0.05', ...
-        '\rho = 0.1', ...
-        '\rho = 0.15', ...
-        '\rho = 0.3', ...
-        '\rho = 0.5'}, ...
+%'Single bank - Middle', ...
+legend({'Uniform \theta = 0.01', ...
+        'Uniform \theta = 0.1' , ...
+        'Uniform \theta = 0.3' , ...
+        'Single bank - Core', ...
+        'Single bank - Periphery'}, ...
         'Location','southeast')
-title('2008, Single bank - Periphery')
+title('2008, \rho = 0.05')
+
+idx_density = 3;
+%storeDr = squeeze(storeDebtRankVals_final(:,idx_density,[1 3]));
+storeDr = squeeze(storeDebtRankVals_final(:,idx_density,[1 3 5]));
+coreDr  = CoreDebtRankVals_final(:,idx_density);
+%midDr   = MiddleDebtRankVals_final(:,idx_density);
+periDr  = PeripheryDebtRankVals_final(:,idx_density);
+
+figure
+%plot(axis_theta, [storeDr coreDr midDr periDr]);
+plot(axis_theta, [storeDr coreDr periDr]);
+set(gca,'FontSize',20)
+ylim([0 1])
+ylabel('DebtRank')
+xlabel('\phi')
+%'Single bank - Middle', ...
+legend({'Uniform \theta = 0.01', ...
+        'Uniform \theta = 0.1' , ...
+        'Uniform \theta = 0.3' , ...
+        'Single bank - Core', ...
+        'Single bank - Periphery'}, ...
+        'Location','southeast')
+title('2008, \rho = 0.15')
+
+% midDr  = PeripheryDebtRankVals_final(:,:);
+% 
+% figure
+% plot(axis_theta, midDr);
+% set(gca,'FontSize',20)
+% ylim([0 1])
+% ylabel('DebtRank')
+% xlabel('\phi')
+% legend({'\rho = 0.05', ...
+%         '\rho = 0.1', ...
+%         '\rho = 0.15', ...
+%         '\rho = 0.3', ...
+%         '\rho = 0.5'}, ...
+%         'Location','southeast')
+% title('2008, Single bank - Periphery')
 
 % midDr  = PeripheryDebtRankVals_first(:,:);
 % 
@@ -98,21 +107,21 @@ title('2008, Single bank - Periphery')
 %         'Location','southeast')
 % title('2008, Single bank - Periphery')
 
-midDr  = PeripheryDebtRankVals_finalWithShock(:,:);
-
-figure
-plot(axis_theta, midDr);
-set(gca,'FontSize',20)
-ylim([0 1])
-ylabel('DebtRank')
-xlabel('\phi')
-legend({'\rho = 0.05', ...
-        '\rho = 0.1', ...
-        '\rho = 0.15', ...
-        '\rho = 0.3', ...
-        '\rho = 0.5'}, ...
-        'Location','southeast')
-title('2008, Single bank - Periphery')
+% midDr  = PeripheryDebtRankVals_finalWithShock(:,:);
+% 
+% figure
+% plot(axis_theta, midDr);
+% set(gca,'FontSize',20)
+% ylim([0 1])
+% ylabel('DebtRank')
+% xlabel('\phi')
+% legend({'\rho = 0.05', ...
+%         '\rho = 0.1', ...
+%         '\rho = 0.15', ...
+%         '\rho = 0.3', ...
+%         '\rho = 0.5'}, ...
+%         'Location','southeast')
+% title('2008, Single bank - Periphery')
 
 
 % storeDr = squeeze(storeDebtRankVals_finalWithShock(:,idx_density,[1 3]));

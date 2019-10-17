@@ -16,8 +16,8 @@ tot_links(tot_links ==0) = []; %throw disconnected nodes
 
 coreBanks = I(1:n);
 periBanks = I(end-n+1:end);
-mid_idx = net_size/2;
-midBanks  = [I(mid_idx-n/2+1:mid_idx) ; I(mid_idx+1:mid_idx+n/2)];
+%mid_idx = net_size/2;
+%midBanks  = [I(mid_idx-n/2+1:mid_idx) ; I(mid_idx+1:mid_idx+n/2)];
 
 end
 

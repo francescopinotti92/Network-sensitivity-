@@ -4,14 +4,14 @@ addpath('matrixSamplingCode')
 addpath('debtrank')
 z_space = logspace(-12, -2, 100);
 phi_space = 0.02:0.02:0.6; 
-n_run = 10;
+n_run = 100;
 max_iter = 10^5;
 [dr_heatmap, ~] = get_heatmap(1, BankscopeRescaled, z_space, phi_space, ...
                                n_run, max_iter);
 
 % z_space = logspace(-12, -2, 100);
 % phi_space = 0.4;
-% n_run = 50;
+% n_run = 100;
 % max_iter = 10^5;
 % alpha = [0,4,6,6.25,6.5,6.75,7,1000];
 % %alpha = [6.25 6.5 6.75 7];
