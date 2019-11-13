@@ -1,4 +1,4 @@
-% input the BankscopeRescaled
+            % input the BankscopeRescaled
 load 'Bankscope_C72_rescaled'
 addpath('matrixSamplingCode')
 addpath('debtrank')
@@ -13,7 +13,7 @@ max_iter = 10^5;
 % phi_space = 0.4;
 % n_run = 100;
 % max_iter = 10^5;
-% alpha = [0,4,6,6.25,6.5,6.75,7,1000];
+% alpha = [0,2,4,6,6.25,6.5,6.75,7,1000];
 % %alpha = [6.25 6.5 6.75 7];
 % [dr_heatmap, ~] = get_heatmap(3, BankscopeRescaled, z_space, phi_space, ...
 %                                 n_run, max_iter, alpha);
